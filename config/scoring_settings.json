@@ -1,0 +1,24 @@
+{
+    "skaterScoring": {
+        "goal": 6,
+        "assist": 4,
+        "shot": 0.9,
+        "shortHandedGoal": 2,
+        "hit": 0.4,
+        "block": 0.6,
+        "pm": 2,
+        "takeaway": 0.6,
+        "hatTrick": 2
+    },
+    "goalieScoring": {
+        "goal": 20,
+        "assist": 4,
+        "shortHandedGoal": 2,
+        "win": 5,
+        "otl": 2,
+        "shutout": 5,
+        "save": 0.6,
+        "goalAgainst": -3,
+        "nineOne": 3
+    }
+}

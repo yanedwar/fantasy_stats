@@ -1,13 +1,22 @@
+import json
 import requests
 
-## TODO: short handed goals logic and goalie goal + assist logic
+## TODO: 
+# goalie goal + assist logic
+
+with open("config/scoring_settings.json", "r") as f:
+    SETTINGS = json.load(f)
+
+SKATER_SET = SETTINGS["skaterScoring"]
+GOALIE_SET = SETTINGS["goalieScoring"]
 
 class Game:
-    def __init__(self, game_id, date, away_team, home_team):
+    def __init__(self, game_id, date, away_team, home_team, shg_scorers):
         self.id = game_id
         self.date = date
         self.ateam = away_team
         self.hteam = home_team
+        self.shg_scorers = shg_scorers
 
 class PlayerStats:
     def __init__(self, player_id, name, team, position):
@@ -20,19 +29,66 @@ class PlayerStats:
 
     def skater(self, goals, assists, shots, sh_goals, hits, blocks, pm, takeaways):
         self.games_played += 1
-        self.points += 6*goals + 2*sh_goals + 4*assists + 0.9*shots + 2*pm + 0.4*hits + 0.6*blocks + 0.6*takeaways
+        self.points += (
+            SKATER_SET["goal"] * goals + 
+            SKATER_SET["assist"] * assists + 
+            SKATER_SET["shot"] * shots + 
+            SKATER_SET["shortHandedGoal"] * sh_goals +
+            SKATER_SET["hit"] * hits + 
+            SKATER_SET["block"] * blocks + 
+            SKATER_SET["pm"] * pm +
+            SKATER_SET["takeaway"] * takeaways
+        )
         if goals >= 3: #hat trick
-            self.points += 2
+            self.points += SKATER_SET["hatTrick"]
         self.points = round(self.points, 1)
     
     def goalie(self, goals, assists, sh_goals, win, otl, shutout, saves, g_against, nine_one):
         self.games_played += 1
-        self.points += 20*goals + 4*assists + 2*sh_goals + 5*win + 2*otl + 5*shutout + 0.6*saves - 3*g_against + 3*nine_one
+        self.points += (
+            GOALIE_SET["goal"] * goals + 
+            GOALIE_SET["assist"] * assists + 
+            GOALIE_SET["shortHandedGoal"] * sh_goals + 
+            GOALIE_SET["win"] * win + 
+            GOALIE_SET["otl"] * otl + 
+            GOALIE_SET["shutout"] * shutout + 
+            GOALIE_SET["save"] * saves + 
+            GOALIE_SET["goalAgainst"] * g_against + 
+            GOALIE_SET["nineOne"] * nine_one
+        )
         self.points = round(self.points, 1)
+
+def short_handed_goals(game_id, ateam_id, hteam_id):
+    url = f"https://api-web.nhle.com/v1/gamecenter/{game_id}/play-by-play"
+    response = requests.get(url, timeout=10)
+    if response.status_code != 200 or not response.text.strip():
+        print("No data returned")
+        exit()
+    data = response.json()
+
+    shg_scorers = []
+
+    plays = data.get("plays")
+    for play in plays:
+        event = play.get("typeDescKey")
+        s_code = play.get("situationCode")
+
+        if event == "goal" and s_code == "1451":
+            if play.get("details", {}).get("eventOwnerTeamId") == ateam_id:
+                scorer = play.get("details", {}).get("scoringPlayerId")
+                shg_scorers.append(scorer)
+
+        if event == "goal" and s_code == "1541":
+            if play.get("details", {}).get("eventOwnerTeamId") == hteam_id:
+                scorer = play.get("details", {}).get("scoringPlayerId")
+                shg_scorers.append(scorer)    
+    
+    return shg_scorers
 
 games_week = []
 players = {}
 
+## LOG GAMES PLAYED THIS WEEK
 sch_url = f"https://api-web.nhle.com/v1/schedule/2025-12-21"
 
 sch_response = requests.get(sch_url, timeout=10)
@@ -50,8 +106,11 @@ for day in sch_data.get("gameWeek", []):
     for game in day.get("games", []):
         game_id = game.get("id")
         away_team = game.get("awayTeam", {}).get("commonName",{}).get("default")
+        away_team_id = game.get("awayTeam", {}).get("id")
         home_team = game.get("homeTeam", {}).get("commonName",{}).get("default")
-        new_game = Game(game_id, date, away_team, home_team)
+        home_team_id = game.get("homeTeam", {}).get("id")
+        shg_scorers = short_handed_goals(game_id, away_team_id, home_team_id)
+        new_game = Game(game_id, date, away_team, home_team, shg_scorers)
         games_week.append(new_game)
 
 week_start = games_week[0].date
@@ -60,6 +119,7 @@ week_end = games_week[-1].date
 #for game in games_week:
 games_testing = games_week[:6] #testing so computer doesn't blow up
 
+## POINTS CALCULATION
 for game in games_week:
     box_url = f"https://api-web.nhle.com/v1/gamecenter/{game.id}/boxscore"
     box_response = requests.get(box_url, timeout=10)
@@ -85,11 +145,16 @@ for game in games_week:
         goals = forward.get("goals", 0)
         assists = forward.get("assists", 0)
         shots = forward.get("sog", 0)
-        sh_goals = 0 #complete logic later
         hits = forward.get("hits", 0)
         blocks = forward.get("blockedShots", 0)
         pm = forward.get("plusMinus", 0)
         takeaways = forward.get("takeaways", 0)
+
+        sh_goals = 0
+        if len(game.shg_scorers) > 0:
+            for scorer in game.shg_scorers:
+                if scorer == player_id:
+                    sh_goals += 1
 
         players[player_id].skater(goals, assists, shots, sh_goals, hits, blocks, pm, takeaways)
 
@@ -105,11 +170,16 @@ for game in games_week:
         goals = defense.get("goals", 0)
         assists = defense.get("assists", 0)
         shots = defense.get("sog", 0)
-        sh_goals = 0 #complete logic later
         hits = defense.get("hits", 0)
         blocks = defense.get("blockedShots", 0)
         pm = defense.get("plusMinus", 0)
         takeaways = defense.get("takeaways", 0)
+
+        sh_goals = 0
+        if len(game.shg_scorers) > 0:
+            for scorer in game.shg_scorers:
+                if scorer == player_id:
+                    sh_goals += 1   
 
         players[player_id].skater(goals, assists, shots, sh_goals, hits, blocks, pm, takeaways)
 
@@ -125,7 +195,12 @@ for game in games_week:
 
             goals = 0 #complete logic later
             assists = 0 #complete logic later
-            sh_goals = 0 #complete logic later
+
+            sh_goals = 0
+            if len(game.shg_scorers) > 0:
+                for scorer in game.shg_scorers:
+                    if scorer == player_id:
+                        sh_goals += 1    
 
             wins = 0
             otl = 0
@@ -161,11 +236,16 @@ for game in games_week:
         goals = forward.get("goals", 0)
         assists = forward.get("assists", 0)
         shots = forward.get("sog", 0)
-        sh_goals = 0 #complete logic later
         hits = forward.get("hits", 0)
         blocks = forward.get("blockedShots", 0)
         pm = forward.get("plusMinus", 0)
         takeaways = forward.get("takeaways", 0)
+
+        sh_goals = 0
+        if len(game.shg_scorers) > 0:
+            for scorer in game.shg_scorers:
+                if scorer == player_id:
+                    sh_goals += 1
 
         players[player_id].skater(goals, assists, shots, sh_goals, hits, blocks, pm, takeaways)
     
@@ -181,11 +261,16 @@ for game in games_week:
         goals = defense.get("goals", 0)
         assists = defense.get("assists", 0)
         shots = defense.get("sog", 0)
-        sh_goals = 0 #complete logic later
         hits = defense.get("hits", 0)
         blocks = defense.get("blockedShots", 0)
         pm = defense.get("plusMinus", 0)
         takeaways = defense.get("takeaways", 0)
+
+        sh_goals = 0
+        if len(game.shg_scorers) > 0:
+            for scorer in game.shg_scorers:
+                if scorer == player_id:
+                    sh_goals += 1
 
         players[player_id].skater(goals, assists, shots, sh_goals, hits, blocks, pm, takeaways)
 
@@ -201,7 +286,12 @@ for game in games_week:
 
             goals = 0 #complete logic later
             assists = 0 #complete logic later
-            sh_goals = 0 #complete logic later
+            
+            sh_goals = 0
+            if len(game.shg_scorers) > 0:
+                for scorer in game.shg_scorers:
+                    if scorer == player_id:
+                        sh_goals += 1
 
             wins = 0
             otl = 0
