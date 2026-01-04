@@ -1,9 +1,6 @@
 import json
 import requests
 
-## TODO: 
-# goalie goal + assist logic
-
 with open("config/scoring_settings.json", "r") as f:
     SETTINGS = json.load(f)
 
@@ -65,31 +62,49 @@ def short_handed_goals(game_id, ateam_id, hteam_id):
         print("No data returned")
         exit()
     data = response.json()
-
-    shg_scorers = []
-
     plays = data.get("plays")
+    shg_scorers = []
     for play in plays:
         event = play.get("typeDescKey")
         s_code = play.get("situationCode")
 
-        if event == "goal" and s_code == "1451":
+        if event == "goal" and (s_code == "1451" or s_code == "1460"):
             if play.get("details", {}).get("eventOwnerTeamId") == ateam_id:
                 scorer = play.get("details", {}).get("scoringPlayerId")
                 shg_scorers.append(scorer)
 
-        if event == "goal" and s_code == "1541":
+        if event == "goal" and (s_code == "1541" or s_code == "0641"):
             if play.get("details", {}).get("eventOwnerTeamId") == hteam_id:
                 scorer = play.get("details", {}).get("scoringPlayerId")
                 shg_scorers.append(scorer)    
     
     return shg_scorers
 
+def goalie_points(game_id, goalie_id):
+    url = f"https://api-web.nhle.com/v1/gamecenter/{game_id}/play-by-play"
+    response = requests.get(url, timeout=10)
+    if response.status_code != 200 or not response.text.strip():
+        print("No data returned")
+        exit()
+    data = response.json()
+    plays = data.get("plays")
+    points = {"goals": 0, "assists": 0}
+    for play in plays:
+        event = play.get("typeDescKey")
+
+        if event == "goal":
+            if play.get("details", {}).get("scoringPlayerId") == goalie_id:
+                points["goals"] += 1
+            if play.get("details", {}).get("assist1PlayerId") == goalie_id or play.get("details", {}).get("assist2PlayerId") == goalie_id:
+                points["assists"] += 1
+    
+    return points
+
 games_week = []
 players = {}
 
 ## LOG GAMES PLAYED THIS WEEK
-sch_url = f"https://api-web.nhle.com/v1/schedule/2025-12-21"
+sch_url = f"https://api-web.nhle.com/v1/schedule/2025-12-27"
 
 sch_response = requests.get(sch_url, timeout=10)
 
@@ -115,9 +130,6 @@ for day in sch_data.get("gameWeek", []):
 
 week_start = games_week[0].date
 week_end = games_week[-1].date
-
-#for game in games_week:
-games_testing = games_week[:6] #testing so computer doesn't blow up
 
 ## POINTS CALCULATION
 for game in games_week:
@@ -193,8 +205,9 @@ for game in games_week:
             if player_id not in players:
                 players[player_id] =  PlayerStats(player_id, name, team, position)
 
-            goals = 0 #complete logic later
-            assists = 0 #complete logic later
+            points = goalie_points(game.id, player_id)
+            goals = points["goals"]
+            assists = points["assists"]
 
             sh_goals = 0
             if len(game.shg_scorers) > 0:
@@ -220,7 +233,6 @@ for game in games_week:
                     shutout = 1
 
             players[player_id].goalie(goals, assists, sh_goals, win, otl, shutout, saves, g_against, nine_one)
-            print(f"{players[player_id].name}: {players[player_id].points}")
 
 ## AWAY
     away_players = game_data.get("playerByGameStats", {}).get("awayTeam")
@@ -284,8 +296,9 @@ for game in games_week:
             if player_id not in players:
                 players[player_id] =  PlayerStats(player_id, name, team, position)
 
-            goals = 0 #complete logic later
-            assists = 0 #complete logic later
+            points = goalie_points(game.id, player_id)
+            goals = points["goals"]
+            assists = points["assists"]
             
             sh_goals = 0
             if len(game.shg_scorers) > 0:
@@ -311,7 +324,6 @@ for game in games_week:
                     shutout = 1
 
             players[player_id].goalie(goals, assists, sh_goals, win, otl, shutout, saves, g_against, nine_one)
-            print(f"{players[player_id].name}: {players[player_id].points}")
 
 sorted_players = sorted(players.values(), key=lambda p: p.points, reverse = True)
 top_10 = sorted_players[:10]
