@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from models import PlayerStats
 from api.schedule import get_week_schedule
 from api.gamecenter import get_boxscore
@@ -23,15 +23,20 @@ def build_email_body(players, start_date, end_date, games_played):
 
     return "\n".join(lines)
 
+def get_last_sunday(today=None):
+    if today is None:
+        today = date.today()
+    return today - timedelta(days=(today.weekday() + 1) % 7)
+
 def main():
     ## START DATE
-    start_date = date(2025, 12, 27)
+    start_date = get_last_sunday()
 
     ## GAMES
     sch_data = get_week_schedule(start_date)
     games_week = get_games(sch_data)
 
-    end_date = games_week[-1].date
+    end_date = start_date + timedelta(days=6)
 
     ## PLAYERS
     players = {}
