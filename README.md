@@ -10,11 +10,11 @@ The goal is to help track player performance over a given week without requiring
 - Processes boxscores and play-by-play events
 - Detects special situations such as:
   - Short-handed goals
-  - Power-play goals
+  - Goalie goals and assists
   - Hat tricks
 - Aggregates player stats across multiple games
 - Computes fantasy points using a customizable scoring system
-- Outputs weekly leaderboards
+- Emails weekly leaderboards to people on the email list
 
 ## Fantasy Rules
 Skaters:
