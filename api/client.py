@@ -11,10 +11,10 @@ def get(endpoint, retries=3, delay=0.5):
 
         if response.status_code == 429:
             if attempt < retries - 1:
-                time.sleep(2)  # back off harder on 429
+                time.sleep(2)
                 continue
             response.raise_for_status()
 
         response.raise_for_status()
-        time.sleep(delay)  # polite pacing
+        time.sleep(delay)
         return response.json()
