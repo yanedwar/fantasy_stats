@@ -2,9 +2,26 @@ from datetime import date
 from models import PlayerStats
 from api.schedule import get_week_schedule
 from api.gamecenter import get_boxscore
+from emailer import send_weekly_email
 from services.games import get_games
 from services.goalie_points import get_goalie_points
 from scoring import get_skater, get_goalie
+
+def build_email_body(players, start_date, end_date, games_played):
+    lines = []
+
+    sorted_players = sorted(players.values(), key=lambda p: p.points, reverse = True)
+    top_30 = sorted_players[:30]    
+    lines.append(f"For the week of {start_date} to {end_date}:")
+    lines.append("=" * 40)
+    lines.append("")
+
+    for p in top_30:
+        lines.append(f"{p.name:<20} ({p.team} | {p.position}) - {p.points} pts in {p.games_played} games")
+
+    lines.append(f"Total number of games this week: {games_played}")
+
+    return "\n".join(lines)
 
 def main():
     ## START DATE
@@ -71,7 +88,7 @@ def main():
                             if scorer == player_id:
                                 sh_goals += 1
 
-                    wins = 0
+                    win = 0
                     otl = 0
                     shutout = 0
                     saves = goalie.get("saves", 0)
@@ -90,15 +107,8 @@ def main():
 
                     get_goalie(players[player_id], goals, assists, sh_goals, win, otl, shutout, saves, g_against, nine_one)
 
-    sorted_players = sorted(players.values(), key=lambda p: p.points, reverse = True)
-    top_10 = sorted_players[:10]    
-    print(f"For the week of {start_date} to {end_date}:")
-    for p in top_10:
-        print(f"{p.name:<20} ({p.team} | {p.position}) - {p.points} pts in {p.games_played} games")
-
-    print(f"Total number of games this week: {len(games_week)}")
-    
-
+    email_body = build_email_body(players, start_date, end_date, len(games_week))
+    send_weekly_email(email_body)
 
 if __name__ == "__main__":
     main()
