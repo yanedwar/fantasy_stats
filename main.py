@@ -30,7 +30,8 @@ def get_last_sunday(today=None):
 
 def main():
     ## START DATE
-    start_date = get_last_sunday()
+    start_date = date(2025, 12, 27)
+    #start_date = get_last_sunday()
 
     ## GAMES
     sch_data = get_week_schedule(start_date)
