@@ -6,10 +6,11 @@ def send_weekly_email(body_text: str):
     sender = os.environ["EMAIL_SENDER"]
     password = os.environ["EMAIL_PASSWORD"]
 
+    raw_recipients = os.getenv("EMAIL_RECIPIENTS", "")
     recipients = [
-        email.strip()
-        for email in os.environ["EMAIL_RECIPIENTS"].split(",")
-        if email.strip()
+        r.strip()
+        for r in raw_recipients.replace("\n", ",").split(",")
+        if r.strip()
     ]
 
     msg = EmailMessage()
