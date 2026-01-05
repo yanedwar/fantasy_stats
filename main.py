@@ -23,15 +23,9 @@ def build_email_body(players, start_date, end_date, games_played):
 
     return "\n".join(lines)
 
-def get_last_sunday(today=None):
-    if today is None:
-        today = date.today()
-    return today - timedelta(days=(today.weekday() + 1) % 7)
-
 def main():
     ## START DATE
-    start_date = date(2025, 12, 27)
-    #start_date = get_last_sunday()
+    start_date = date(2025, 12, 27) # test starting date
 
     ## GAMES
     sch_data = get_week_schedule(start_date)
