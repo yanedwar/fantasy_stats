@@ -1,4 +1,5 @@
 test.py
+email_list.txt
 __pycache__/
 *.pyc
 *.pyo

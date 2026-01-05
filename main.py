@@ -26,7 +26,12 @@ def build_email_body(players, start_date, end_date, games_played):
 def get_last_sunday(today=None):
     if today is None:
         today = date.today()
-    return today - timedelta(days=(today.weekday() + 1) % 7)
+
+    days_since_sunday = (today.weekday() + 1) % 7
+    if days_since_sunday == 0:
+        days_since_sunday = 7
+
+    return today - timedelta(days=days_since_sunday)
 
 def main():
     ## START DATE
