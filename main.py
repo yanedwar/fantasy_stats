@@ -13,7 +13,7 @@ def get_last_week(today=None):
     if today is None:
         today = date.today()
 
-    return today - timedelta(days=13)
+    return today - timedelta(days=7)
 
 def main():
     ## START DATE
