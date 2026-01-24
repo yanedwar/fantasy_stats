@@ -2,40 +2,20 @@ from datetime import date, timedelta
 from models import PlayerStats
 from api.schedule import get_week_schedule
 from api.gamecenter import get_boxscore
-from emailer import send_weekly_email
+from emailer import send_weekly_email, build_email_body
 from services.games import get_games
 from services.goalie_points import get_goalie_points
 from scoring import get_skater, get_goalie
 
-def build_email_body(players, start_date, end_date, games_played):
-    lines = []
-
-    sorted_players = sorted(players.values(), key=lambda p: p.points, reverse = True)
-    top_30 = sorted_players[:30]    
-    lines.append(f"For the week of {start_date} to {end_date}:")
-    lines.append("=" * 40)
-    lines.append("")
-
-    for p in top_30:
-        lines.append(f"{p.name:<20} ({p.team} | {p.position}) - {p.points} pts in {p.games_played} games")
-
-    lines.append(f"Total number of games this week: {games_played}")
-
-    return "\n".join(lines)
-
-def get_last_sunday(today=None):
+def get_last_week(today=None):
     if today is None:
         today = date.today()
 
-    days_since_sunday = (today.weekday() + 1) % 7
-    if days_since_sunday == 0:
-        days_since_sunday = 7
-
-    return today - timedelta(days=days_since_sunday)
+    return today - timedelta(days=7)
 
 def main():
     ## START DATE
-    start_date = get_last_sunday()
+    start_date = get_last_week()
 
     ## GAMES
     sch_data = get_week_schedule(start_date)

@@ -20,5 +20,8 @@
         "save": 0.6,
         "goalAgainst": -3,
         "nineOne": 3
-    }
+    },
+    "topForwards": 15,
+    "topDefence": 10,
+    "topGoalies": 5
 }
