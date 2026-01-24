@@ -1,17 +1,19 @@
 from datetime import date, timedelta
 from models import PlayerStats
+from analysis.aggregation import build_season_totals, save_season_totals
 from api.schedule import get_week_schedule
 from api.gamecenter import get_boxscore
 from emailer import send_weekly_email, build_email_body
 from services.games import get_games
 from services.goalie_points import get_goalie_points
+from services.store import store_week, week_exists
 from scoring import get_skater, get_goalie
 
 def get_last_week(today=None):
     if today is None:
         today = date.today()
 
-    return today - timedelta(days=7)
+    return today - timedelta(days=13)
 
 def main():
     ## START DATE
@@ -100,6 +102,15 @@ def main():
     email_body = build_email_body(players, start_date, end_date, len(games_week))
     #send_weekly_email(email_body)
     print(email_body)
+
+    if week_exists(start_date):
+        print(f"Week {start_date} already processed. Skipping save.")
+    else:
+        file_path = store_week(players, start_date, end_date, len(games_week))
+        print(f"Saved weekly data to {file_path}")
+
+    season = build_season_totals()
+    save_season_totals(season)
 
 if __name__ == "__main__":
     main()

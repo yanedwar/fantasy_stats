@@ -1,7 +1,11 @@
 import os
 import smtplib
+import json
 from email.message import EmailMessage
 from services.leaderboard import top_goalies, top_defence, top_forwards
+
+with open("config/scoring_settings.json", "r") as f:
+    SETTINGS = json.load(f)
 
 def send_weekly_email(body_text: str):
     sender = os.environ["EMAIL_SENDER"]
@@ -29,9 +33,9 @@ def send_weekly_email(body_text: str):
 def build_email_body(players, start_date, end_date, games_played):
     lines = []
 
-    top_f = top_forwards(players)   
-    top_d = top_defence(players)
-    top_g = top_goalies(players)
+    top_f = top_forwards(players)[:SETTINGS["topForwards"]]   
+    top_d = top_defence(players)[:SETTINGS["topDefence"]]
+    top_g = top_goalies(players)[:SETTINGS["topGoalies"]]
     lines.append(f"For the week of {start_date} to {end_date}:")
     lines.append("=" * 40)
     lines.append("")
