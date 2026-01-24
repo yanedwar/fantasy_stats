@@ -99,10 +99,6 @@ def main():
 
                     get_goalie(players[player_id], goals, assists, sh_goals, win, otl, shutout, saves, g_against, nine_one)
 
-    email_body = build_email_body(players, start_date, end_date, len(games_week))
-    #send_weekly_email(email_body)
-    print(email_body)
-
     if week_exists(start_date):
         print(f"Week {start_date} already processed. Skipping save.")
     else:
@@ -111,6 +107,9 @@ def main():
 
     season = build_season_totals()
     save_season_totals(season)
+
+    email_body = build_email_body(players, start_date, end_date, len(games_week))
+    send_weekly_email(email_body)
 
 if __name__ == "__main__":
     main()
