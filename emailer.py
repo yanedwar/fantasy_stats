@@ -40,14 +40,17 @@ def build_email_body(players, start_date, end_date, games_played):
     for p in top_f:
         lines.append(f"{p.name:<20} ({p.team} | {p.position}) - {p.points} pts in {p.games_played} games")
 
+    lines.append("")
     lines.append(f"Top {len(top_d)} defence of the week:")
     for p in top_d:
         lines.append(f"{p.name:<20} ({p.team} | {p.position}) - {p.points} pts in {p.games_played} games")
 
+    lines.append("")
     lines.append(f"Top {len(top_g)} goalies of the week:")
     for p in top_g:
         lines.append(f"{p.name:<20} ({p.team} | {p.position}) - {p.points} pts in {p.games_played} games")
 
+    lines.append("")
     lines.append(f"Total number of games this week: {games_played}")
 
     return "\n".join(lines)
