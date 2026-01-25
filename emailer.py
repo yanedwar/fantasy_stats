@@ -2,6 +2,7 @@ import os
 import smtplib
 import json
 from email.message import EmailMessage
+from analysis.ppg import top_ppg_defence, top_ppg_forwards, top_ppg_goalies
 from services.leaderboard import top_goalies, top_defence, top_forwards
 
 with open("config/scoring_settings.json", "r") as f:
@@ -33,12 +34,25 @@ def send_weekly_email(body_text: str):
 def build_email_body(players, start_date, end_date, games_played):
     lines = []
 
-    top_f = top_forwards(players)[:SETTINGS["topForwards"]]   
-    top_d = top_defence(players)[:SETTINGS["topDefence"]]
-    top_g = top_goalies(players)[:SETTINGS["topGoalies"]]
     lines.append(f"For the week of {start_date} to {end_date}:")
     lines.append("=" * 40)
     lines.append("")
+
+    lines.append(top_players(players))
+
+    lines.append(top_ppg())
+
+    lines.append("")
+    lines.append(f"Total number of games this week: {games_played}")
+
+    return "\n".join(lines)
+
+def top_players(players):
+    lines = []
+
+    top_f = top_forwards(players)[:SETTINGS["topForwards"]]   
+    top_d = top_defence(players)[:SETTINGS["topDefence"]]
+    top_g = top_goalies(players)[:SETTINGS["topGoalies"]]
 
     lines.append(f"Top {len(top_f)} forwards of the week:")
     for p in top_f:
@@ -55,6 +69,42 @@ def build_email_body(players, start_date, end_date, games_played):
         lines.append(f"{p.name:<20} ({p.team} | {p.position}) - {p.points} pts in {p.games_played} games")
 
     lines.append("")
-    lines.append(f"Total number of games this week: {games_played}")
+
+    return "\n".join(lines)
+
+def top_ppg():
+    lines = []
+
+    top_f = top_ppg_forwards()[:SETTINGS["topForwards"]]  
+    top_d = top_ppg_defence()[:SETTINGS["topDefence"]]
+    top_g = top_ppg_goalies()[:SETTINGS["topGoalies"]]
+
+    lines.append(f"Top {len(top_f)} forwards by ppg:")
+    for p in top_f:
+        name = p["name"]
+        team = p["team"]
+        position = p["position"]
+        ppg = p["ppg"]
+        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg")
+
+    lines.append("")
+    lines.append(f"Top {len(top_d)} defence by ppg:")
+    for p in top_d:
+        name = p["name"]
+        team = p["team"]
+        position = p["position"]
+        ppg = p["ppg"]
+        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg")
+
+    lines.append("")
+    lines.append(f"Top {len(top_g)} goalies by ppg:")
+    for p in top_g:
+        name = p["name"]
+        team = p["team"]
+        position = p["position"]
+        ppg = p["ppg"]
+        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg")
+
+    lines.append("")
 
     return "\n".join(lines)

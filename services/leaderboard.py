@@ -1,5 +1,5 @@
 def top_forwards(players):
-    forwards = [p for p in players.values() if p.position == "C" or p.position == "R" or p.position == "L"]
+    forwards = [p for p in players.values() if p.position in ("C", "L", "R")]
     forwards.sort(key=lambda p: p.points, reverse = True)
     return forwards
 

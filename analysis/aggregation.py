@@ -20,13 +20,19 @@ def build_season_totals():
                     "team": pdata["team"],
                     "position": pdata["position"],
                     "points": 0.0,
+                    "ppg": 0.0,
                     "games_played": 0,
                     "weeksPoints": {}
                 }
 
             season[pid]["points"] += pdata["points"]
+
             season[pid]["points"] = round(season[pid]["points"], 2)
             season[pid]["games_played"] += pdata["games_played"]
+
+            season[pid]["ppg"] = season[pid]["points"] / season[pid]["games_played"]
+            season[pid]["ppg"] = round(season[pid]["ppg"], 2)
+
             season[pid]["weeksPoints"][week["weekStart"]] = round(pdata["points"], 2)
 
     return season
