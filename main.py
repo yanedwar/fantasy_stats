@@ -13,7 +13,7 @@ def get_last_week(today=None):
     if today is None:
         today = date.today()
 
-    return today - timedelta(days=7)
+    return today - timedelta(days=69)
 
 def main():
     ## START DATE
@@ -62,6 +62,9 @@ def main():
 
             for goalie in team_players["goalies"]:
                 if goalie.get("toi") != "00:00":
+                    if goalie.get("savePctg") is None:
+                        continue
+
                     player_id = goalie.get("playerId")
                     name = goalie["name"]["default"]
                     team = game_data.get(side, {}).get("abbrev")
@@ -109,7 +112,8 @@ def main():
     save_season_totals(season)
 
     email_body = build_email_body(players, start_date, end_date, len(games_week))
-    send_weekly_email(email_body)
+    #send_weekly_email(email_body)
+    print(email_body)
 
 if __name__ == "__main__":
     main()
