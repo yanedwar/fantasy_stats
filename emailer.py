@@ -85,7 +85,8 @@ def top_ppg():
         team = p["team"]
         position = p["position"]
         ppg = p["ppg"]
-        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg")
+        gp = p["games_played"]
+        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg in {gp} games played")
 
     lines.append("")
     lines.append(f"Top {len(top_d)} defence by ppg:")
@@ -94,7 +95,8 @@ def top_ppg():
         team = p["team"]
         position = p["position"]
         ppg = p["ppg"]
-        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg")
+        gp = p["games_played"]
+        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg in {gp} games played")
 
     lines.append("")
     lines.append(f"Top {len(top_g)} goalies by ppg:")
@@ -103,7 +105,8 @@ def top_ppg():
         team = p["team"]
         position = p["position"]
         ppg = p["ppg"]
-        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg")
+        gp = p["games_played"]
+        lines.append(f"{name:<20} ({team} | {position}) - {ppg} ppg in {gp} games played")
 
     lines.append("")
 
