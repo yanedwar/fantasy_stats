@@ -112,8 +112,7 @@ def main():
     save_season_totals(season)
 
     email_body = build_email_body(players, start_date, end_date, len(games_week))
-    #send_weekly_email(email_body)
-    print(email_body)
+    send_weekly_email(email_body)
 
 if __name__ == "__main__":
     main()
