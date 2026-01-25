@@ -3,7 +3,7 @@
 ## Overview
 This is a tool that pulls weekly boxscore data from a public NHL API. It computes the weekly fantasy hockey scores for both skaters and goalies according a set of configurable rules. The rules for this specific fantasy league are recorded [below](#fantasy-rules). 
 
-The goal is to help track player performance over a given week without requiring constantly checking the fantasy league scoreboard personally.
+The goal is to help track player performance without requiring constantly checking the fantasy league scoreboard personally. Analytics and stats are computed and also communicated via email to those on the email list. New features and analytics are being added.
 
 ## Features
 - Fetches NHL game data from the public NHL API
@@ -15,6 +15,7 @@ The goal is to help track player performance over a given week without requiring
 - Aggregates player stats across multiple games
 - Computes fantasy points using a customizable scoring system
 - Emails weekly leaderboards to people on the email list
+- Aggregates player stats across multiple weeks to compute more insightful and useful fantasy statistics
 
 ## Fantasy Rules
 Skaters:

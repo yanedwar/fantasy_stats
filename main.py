@@ -13,7 +13,7 @@ def get_last_week(today=None):
     if today is None:
         today = date.today()
 
-    return today - timedelta(days=7)
+    return today - timedelta(days=69)
 
 def main():
     ## START DATE
@@ -62,6 +62,9 @@ def main():
 
             for goalie in team_players["goalies"]:
                 if goalie.get("toi") != "00:00":
+                    if goalie.get("savePctg") is None:
+                        continue
+
                     player_id = goalie.get("playerId")
                     name = goalie["name"]["default"]
                     team = game_data.get(side, {}).get("abbrev")
