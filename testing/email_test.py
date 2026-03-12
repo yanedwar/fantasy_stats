@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from services.emailer import build_email_body
 from models import PlayerStats
 
-with open("data/weeks/2025-12-07.json", "r") as f:
+with open("data/weeks/2026-03-01.json", "r") as f:
     TEST = json.load(f)
 
 if __name__ == "__main__":

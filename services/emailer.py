@@ -126,7 +126,7 @@ def hot_streaks():
         name = player["name"]
         position = player["position"]
         team = player["team"]
-        lines.append(f"{name:<20} ({team} | {position}) → {last3} avg: {round(three_hot_streak(player), 2)}")
+        lines.append(f"{name:<20} ({team} | {position}) → {last3} avg: {round(three_hot_streak(player)/3, 2)}")
     
     lines.append("")
 
@@ -139,13 +139,11 @@ def heating_up():
     lines.append(f"Top {len(heating)} players heating up over the last three weeks:")
 
     for player in heating:
-        weeks = sorted(player["weeksPoints"])
-        #last3 = [player["weeksPoints"][w] for w in weeks[-3:]]
         name = player["name"]
         position = player["position"]
         ppg = player["ppg"]
         team = player["team"]
-        lines.append(f"{name:<20} ({team} | {position}) season avg: {ppg} → latest 3 weeks avg: {round(three_hot_streak(player), 2)}")
+        lines.append(f"{name:<20} ({team} | {position}) season avg: {ppg} → latest 3 weeks avg: {round(three_hot_streak(player)/3, 2)}")
     
     lines.append("")
 

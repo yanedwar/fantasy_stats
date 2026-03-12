@@ -9,9 +9,6 @@ from services.goalie_points import get_goalie_points
 from services.store import store_week, week_exists
 from scoring import get_skater, get_goalie
 
-## TODO:
-# Make it so only regular season games are shown (check game type)
-
 def get_last_week(today=None):
     if today is None:
         today = date.today()
@@ -37,23 +34,23 @@ def main():
 
         for side in ("homeTeam", "awayTeam"):
         
-            team_players = game_data.get("playerByGameStats", {}).get(side)
-            for forward in team_players["forwards"] + team_players["defense"]:
-                player_id = forward.get("playerId")
-                name = forward["name"]["default"]
+            team_players = game_data.get("playerByGameStats", {}).get(side, {})
+            for skater in team_players.get("forwards", []) + team_players.get("defense", []):
+                player_id = skater.get("playerId")
+                name = skater["name"]["default"]
                 team = game_data.get(side, {}).get("abbrev")
-                position = forward["position"]
+                position = skater["position"]
 
                 if player_id not in players:
                     players[player_id] =  PlayerStats(player_id, name, team, position)
 
-                goals = forward.get("goals", 0)
-                assists = forward.get("assists", 0)
-                shots = forward.get("sog", 0)
-                hits = forward.get("hits", 0)
-                blocks = forward.get("blockedShots", 0)
-                pm = forward.get("plusMinus", 0)
-                takeaways = forward.get("takeaways", 0)
+                goals = skater.get("goals", 0)
+                assists = skater.get("assists", 0)
+                shots = skater.get("sog", 0)
+                hits = skater.get("hits", 0)
+                blocks = skater.get("blockedShots", 0)
+                pm = skater.get("plusMinus", 0)
+                takeaways = skater.get("takeaways", 0)
 
                 sh_goals = 0
                 if len(game.shg_scorers) > 0:
@@ -63,7 +60,7 @@ def main():
 
                 get_skater(players[player_id], goals, assists, shots, sh_goals, hits, blocks, pm, takeaways)
 
-            for goalie in team_players["goalies"]:
+            for goalie in team_players.get("goalies", []):
                 if goalie.get("toi") != "00:00":
                     if goalie.get("savePctg") is None:
                         continue
