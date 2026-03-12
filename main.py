@@ -1,3 +1,5 @@
+import argparse
+import json
 from datetime import date, timedelta
 from models import PlayerStats
 from analysis.aggregation import build_season_totals, save_season_totals
@@ -15,9 +17,47 @@ def get_last_week(today=None):
 
     return today - timedelta(days=7)
 
+def get_last_last_sunday(today=None):
+    if today is None:
+        today = date.today()
+    subtract = (today.weekday() + 1) % 7
+    return today - timedelta(days=7+subtract)
+
+with open(f"data/weeks/{get_last_last_sunday()}.json", "r") as f:
+    TEST = json.load(f)
+
 def main():
+    parser = argparse.ArgumentParser(
+        prog='NHL fantasy stats',
+        description='Run NHL fantasy stats or add arguments for testing')
+    parser.add_argument('-e', '--print_email', action='store_true', help='Print only email body for testing')
+    parser.add_argument('-d', '--print_data', action='store_true', help='Run data collection and print email body for testing')
+    args = parser.parse_args()
+
+    if args.print_email:
+        players_dict = {}
+        players = TEST["playerStats"]
+        start_date = TEST["weekStart"]
+        end_date = TEST["weekEnd"]
+        games_played_week = TEST["gamesPlayed"]
+        for player in players.values():
+            name = player["name"]
+            position = player["position"]
+            team = player["team"]
+            points = player["points"]
+            games_played = player["games_played"]
+            players_dict[player["player_id"]] = PlayerStats(player["player_id"], name, team, position)
+            players_dict[player["player_id"]].points = points
+            players_dict[player["player_id"]].games_played = games_played
+        email_body = build_email_body(players_dict, start_date, end_date, games_played_week)
+        print(email_body)
+        return 0
+
     ## START DATE
-    start_date = get_last_week()
+    if args.print_data:
+        start_date= get_last_last_sunday()
+    else:
+        start_date = get_last_week()
 
     ## GAMES
     sch_data = get_week_schedule(start_date)
@@ -112,7 +152,12 @@ def main():
     save_season_totals(season)
 
     email_body = build_email_body(players, start_date, end_date, len(games_week))
-    send_weekly_email(email_body)
+    if args.print_data:
+        print(email_body)
+    else:
+        send_weekly_email(email_body)
+
+    return 0
 
 if __name__ == "__main__":
     main()

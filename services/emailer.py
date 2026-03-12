@@ -2,7 +2,7 @@ import os
 import smtplib
 import json
 from email.message import EmailMessage
-from analysis.stats_calc import top_ppg_defence, top_ppg_forwards, top_ppg_goalies, three_hot_streak, hottest_players, heating_up_players
+from analysis.stats_calc import top_ppg_defence, top_ppg_forwards, top_ppg_goalies, three_hot_streak, hottest_players, heating_up_players, consistency, consistent_players, boom_rate, high_ceiling_players
 from services.leaderboard import top_goalies, top_defence, top_forwards
 
 with open("config/scoring_settings.json", "r") as f:
@@ -42,6 +42,10 @@ def build_email_body(players, start_date, end_date, games_played):
     lines.append(top_players(players))
 
     lines.append(top_ppg())
+
+    lines.append(consistent_performances())
+
+    lines.append(high_ceiling_performances())
 
     lines.append(hot_streaks())
 
@@ -117,7 +121,7 @@ def top_ppg():
 def hot_streaks():
     lines = []
 
-    hottest = hottest_players()
+    hottest = hottest_players(n=SETTINGS["topHottest"])
     lines.append(f"Top {len(hottest)} players on a hot streak from the last three weeks:")
 
     for player in hottest:
@@ -135,8 +139,8 @@ def hot_streaks():
 def heating_up():
     lines = []
 
-    heating = heating_up_players()
-    lines.append(f"Top {len(heating)} players heating up over the last three weeks:")
+    heating = heating_up_players(n=SETTINGS["topHeating"])
+    lines.append(f"Top {len(heating)} players heating up (compared to their own average) over the last three weeks:")
 
     for player in heating:
         name = player["name"]
@@ -144,6 +148,43 @@ def heating_up():
         ppg = player["ppg"]
         team = player["team"]
         lines.append(f"{name:<20} ({team} | {position}) season avg: {ppg} → latest 3 weeks avg: {round(three_hot_streak(player)/3, 2)}")
+    
+    lines.append("")
+
+    return "\n".join(lines) 
+
+def consistent_performances():
+    lines = []
+
+    consistent = consistent_players(n=SETTINGS["topConsistent"])
+    lines.append(f"Top {len(consistent)} consistent players (above 20 games played and 5.5 ppg avg):")
+
+    for player in consistent:
+        name = player["name"]
+        position = player["position"]
+        ppg = player["ppg"]
+        team = player["team"]
+        games_played = player["games_played"]
+        lines.append(f"{name:<20} ({team} | {position}) performance: {ppg} ± {round(consistency(player), 2)} in {games_played} games")
+    
+    lines.append("")
+
+    return "\n".join(lines) 
+
+def high_ceiling_performances():
+    lines = []
+
+    threshold=SETTINGS["thresholdBoomBust"]
+    boomin = high_ceiling_players(n=SETTINGS["topBoom"], per_game_threshold = threshold)
+    lines.append(f"Top {len(boomin)} boomin' players (how often above {3*threshold} points):")
+
+    for player in boomin:
+        name = player["name"]
+        position = player["position"]
+        ppg = player["ppg"]
+        team = player["team"]
+        games_played = player["games_played"]
+        lines.append(f"{name:<20} ({team} | {position}) avg performance: {ppg} → boomin' performance: {round(boom_rate(player, per_game_threshold=threshold)*100,2)}% in {games_played} games")
     
     lines.append("")
 
