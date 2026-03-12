@@ -26,7 +26,7 @@ def three_hot_streak(player, n=3):
     last = [player["weeksPoints"][w] for w in weeks[-n:]]
     return sum(last) / len(last)
 
-def hottest_players(n=15):
+def hottest_players(n=10):
     eligible = [p for p in players.values() if len(p["weeksPoints"]) >= 3]
 
     ranked = sorted(eligible, key=lambda p: three_hot_streak(p), reverse = True)
@@ -43,3 +43,29 @@ def heating_up_players(n=10):
 
     return ranked[:n]
 
+def consistency(player):
+    points = list(player["weeksPoints"].values())
+    return statistics.pstdev(points)
+
+def consistent_players(n=10):
+    eligible = [p for p in players.values() if len(p["weeksPoints"]) >= 20 and p["ppg"] >= 5.5]
+
+    ranked = sorted(eligible, key=lambda p: consistency(p), reverse = False)
+
+    return ranked[:n]
+
+def boom_rate(player, per_game_threshold=10):
+    points = list(player["weeksPoints"].values())
+    threshold = 3*per_game_threshold
+    return sum(p >= threshold for p in points) / len(points)
+
+def high_ceiling_players(n=10, per_game_threshold=10):
+    eligible = [p for p in players.values() if len(p["weeksPoints"]) >= 3]
+
+    ranked = sorted(eligible, key=lambda p: boom_rate(p, per_game_threshold), reverse = True)
+
+    return ranked[:n]
+
+def bust_rate(player, threshold=3):
+    points = list(player["weeksPoints"].values())
+    return sum(p <= threshold for p in points) / len(points)

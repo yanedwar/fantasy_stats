@@ -39,7 +39,7 @@ def main():
         players = TEST["playerStats"]
         start_date = TEST["weekStart"]
         end_date = TEST["weekEnd"]
-        games_played = TEST["gamesPlayed"]
+        games_played_week = TEST["gamesPlayed"]
         for player in players.values():
             name = player["name"]
             position = player["position"]
@@ -49,7 +49,7 @@ def main():
             players_dict[player["player_id"]] = PlayerStats(player["player_id"], name, team, position)
             players_dict[player["player_id"]].points = points
             players_dict[player["player_id"]].games_played = games_played
-        email_body = build_email_body(players_dict, start_date, end_date, games_played)
+        email_body = build_email_body(players_dict, start_date, end_date, games_played_week)
         print(email_body)
         return 0
 

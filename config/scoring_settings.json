@@ -23,5 +23,11 @@
     },
     "topForwards": 15,
     "topDefence": 10,
-    "topGoalies": 5
+    "topGoalies": 5,
+    "topHottest": 10,
+    "topHeating": 10,
+    "topConsistent": 10,
+    "topBoom": 10,
+    "topBust": 10,
+    "thresholdBoomBust": 12
 }
