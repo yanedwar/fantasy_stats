@@ -3,11 +3,14 @@ from models import PlayerStats
 from analysis.aggregation import build_season_totals, save_season_totals
 from api.schedule import get_week_schedule
 from api.gamecenter import get_boxscore
-from emailer import send_weekly_email, build_email_body
+from services.emailer import send_weekly_email, build_email_body
 from services.games import get_games
 from services.goalie_points import get_goalie_points
 from services.store import store_week, week_exists
 from scoring import get_skater, get_goalie
+
+## TODO:
+# Make it so only regular season games are shown (check game type)
 
 def get_last_week(today=None):
     if today is None:
