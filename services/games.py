@@ -17,6 +17,8 @@ def get_games(data):
     for day in data.get("gameWeek", []):
         date = day.get("date", {})
         for game in day.get("games", []):
+            if game["gameType"] != 2:
+                continue
             games_week.append(game_info(game, date))
 
     return games_week
