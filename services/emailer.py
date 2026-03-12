@@ -37,18 +37,30 @@ def build_email_body(players, start_date, end_date, games_played):
     lines.append(f"For the week of {start_date} to {end_date}:")
     lines.append(f"Total number of games this week: {games_played}")
     lines.append("=" * 40)
+
+    lines.append("=" * 15)
+    lines.append("Weekly Summary")
+    lines.append("=" * 15)
     lines.append("")
 
     lines.append(top_players(players))
 
+    lines.append("=" * 15)
+    lines.append("Points Per Game (ppg) Summary")
+    lines.append("=" * 15)
     lines.append(top_ppg())
 
+    lines.append("=" * 15)
+    lines.append("Consistency Summary")
+    lines.append("=" * 15)
     lines.append(consistent_performances())
 
     lines.append(high_ceiling_performances())
 
+    lines.append("=" * 15)
+    lines.append("Hot and Heating Players Summary")
+    lines.append("=" * 15)
     lines.append(hot_streaks())
-
     lines.append(heating_up())
 
     return "\n".join(lines)
