@@ -2,7 +2,7 @@ import os
 import smtplib
 import json
 from email.message import EmailMessage
-from analysis.ppg import top_ppg_defence, top_ppg_forwards, top_ppg_goalies
+from analysis.stats_calc import top_ppg_defence, top_ppg_forwards, top_ppg_goalies, three_hot_streak, hottest_players, heating_up_players
 from services.leaderboard import top_goalies, top_defence, top_forwards
 
 with open("config/scoring_settings.json", "r") as f:
@@ -35,6 +35,7 @@ def build_email_body(players, start_date, end_date, games_played):
     lines = []
 
     lines.append(f"For the week of {start_date} to {end_date}:")
+    lines.append(f"Total number of games this week: {games_played}")
     lines.append("=" * 40)
     lines.append("")
 
@@ -42,8 +43,9 @@ def build_email_body(players, start_date, end_date, games_played):
 
     lines.append(top_ppg())
 
-    lines.append("")
-    lines.append(f"Total number of games this week: {games_played}")
+    lines.append(hot_streaks())
+
+    lines.append(heating_up())
 
     return "\n".join(lines)
 
@@ -111,3 +113,41 @@ def top_ppg():
     lines.append("")
 
     return "\n".join(lines)
+
+def hot_streaks():
+    lines = []
+
+    hottest = hottest_players()
+    lines.append(f"Top {len(hottest)} players on a hot streak from the last three weeks:")
+
+    for player in hottest:
+        weeks = sorted(player["weeksPoints"])
+        last3 = [player["weeksPoints"][w] for w in weeks[-3:]]
+        name = player["name"]
+        position = player["position"]
+        team = player["team"]
+        lines.append(f"{name:<20} ({team} | {position}) → {last3} avg: {round(three_hot_streak(player), 2)}")
+    
+    lines.append("")
+
+    return "\n".join(lines)    
+
+def heating_up():
+    lines = []
+
+    heating = heating_up_players()
+    lines.append(f"Top {len(heating)} players heating up over the last three weeks:")
+
+    for player in heating:
+        weeks = sorted(player["weeksPoints"])
+        #last3 = [player["weeksPoints"][w] for w in weeks[-3:]]
+        name = player["name"]
+        position = player["position"]
+        ppg = player["ppg"]
+        team = player["team"]
+        lines.append(f"{name:<20} ({team} | {position}) season avg: {ppg} → latest 3 weeks avg: {round(three_hot_streak(player), 2)}")
+    
+    lines.append("")
+
+    return "\n".join(lines) 
+
