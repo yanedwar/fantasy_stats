@@ -9,6 +9,9 @@ from services.goalie_points import get_goalie_points
 from services.store import store_week, week_exists
 from scoring import get_skater, get_goalie
 
+## TODO:
+# Make it so only regular season games are shown (check game type)
+
 def get_last_week(today=None):
     if today is None:
         today = date.today()
