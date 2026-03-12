@@ -16,6 +16,10 @@ The goal is to help track player performance without requiring constantly checki
 - Computes fantasy points using a customizable scoring system
 - Emails weekly leaderboards to people on the email list
 - Aggregates player stats across multiple weeks to compute more insightful and useful fantasy statistics
+  - Top consistent(ly good) players
+  - Bomming players (players that often get above a certain amount of points)
+  - Players on a recent hot streak
+  - Players heating up compared to their own average
 
 ## Fantasy Rules
 Skaters:
