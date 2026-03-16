@@ -188,7 +188,7 @@ def high_ceiling_performances():
 
     threshold=SETTINGS["thresholdBoomBust"]
     boomin = high_ceiling_players(n=SETTINGS["topBoom"], per_game_threshold = threshold)
-    lines.append(f"Top {len(boomin)} boomin' players (how often above {3*threshold} points):")
+    lines.append(f"Top {len(boomin)} boomin' players (how often above {3*threshold} points per week):")
 
     for player in boomin:
         name = player["name"]
