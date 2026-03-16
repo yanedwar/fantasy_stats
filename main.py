@@ -56,7 +56,7 @@ def main():
     if args.print_data:
         start_date= get_last_last_sunday()
     else:
-        start_date = get_last_last_sunday()
+        start_date = get_last_week()
 
     ## GAMES
     sch_data = get_week_schedule(start_date)
