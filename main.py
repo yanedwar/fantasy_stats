@@ -23,9 +23,6 @@ def get_last_last_sunday(today=None):
     subtract = (today.weekday() + 1) % 7
     return today - timedelta(days=7+subtract)
 
-with open(f"data/weeks/{get_last_last_sunday()}.json", "r") as f:
-    TEST = json.load(f)
-
 def main():
     parser = argparse.ArgumentParser(
         prog='NHL fantasy stats',
@@ -35,6 +32,8 @@ def main():
     args = parser.parse_args()
 
     if args.print_email:
+        with open(f"data/weeks/{get_last_last_sunday()}.json", "r") as f:
+            TEST = json.load(f)
         players_dict = {}
         players = TEST["playerStats"]
         start_date = TEST["weekStart"]
