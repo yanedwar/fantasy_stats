@@ -12,6 +12,9 @@ def week_exists(start_date):
 def store_week(players, start_date, end_date, games_played, overwrite = False):
     filename = WEEK_DIR / f"{start_date}.json"
 
+    if games_played == 0:
+        return None
+
     data = {
         "weekStart": start_date.strftime('%Y-%m-%d'),
         "weekEnd": end_date.strftime('%Y-%m-%d'),
