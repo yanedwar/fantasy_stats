@@ -6,8 +6,20 @@ from api.gamecenter import get_boxscore
 from services.games import get_games
 from services.goalie_points import get_goalie_points
 
-WEEK_DIR = Path("data/peripherals")
-SEASON_PERIPHERALS_FILE = WEEK_DIR / "season_peripherals.json"
+
+def _season_str_from_date(d):
+    if d.month >= 7:
+        start = d.year
+    else:
+        start = d.year - 1
+    return f"{start}-{start + 1}"
+
+
+def _peripherals_dir_for_date(d: date) -> Path:
+    season = _season_str_from_date(d)
+    p = Path("data") / season / "peripherals"
+    p.mkdir(parents=True, exist_ok=True)
+    return p
 
 class SkaterPeripherals:
     def __init__(self, player_id, name, team, position):
@@ -169,14 +181,16 @@ def serialize_peripheral_player(stats):
     }
 
 def append_peripherals_to_season(peripherals, start_date):
-    WEEK_DIR.mkdir(parents=True, exist_ok=True)
+    dirpath = _peripherals_dir_for_date(start_date)
     week_key = str(start_date)
 
     existing_players = []
     processed_weeks = []
 
-    if SEASON_PERIPHERALS_FILE.exists():
-        with open(SEASON_PERIPHERALS_FILE, "r") as f:
+    season_file = dirpath / "season_peripherals.json"
+
+    if season_file.exists():
+        with open(season_file, "r", encoding="utf-8") as f:
             try:
                 existing_data = json.load(f)
             except json.JSONDecodeError:
@@ -225,7 +239,7 @@ def append_peripherals_to_season(peripherals, start_date):
     players.sort(key=lambda p: (p.get("position", ""), p.get("name", "")))
     processed_weeks.append(week_key)
 
-    with open(SEASON_PERIPHERALS_FILE, "w") as f:
+    with open(season_file, "w", encoding="utf-8") as f:
         json.dump({
             "processed_weeks": processed_weeks,
             "players": players
@@ -234,18 +248,18 @@ def append_peripherals_to_season(peripherals, start_date):
     return True
 
 def save_week_peripherals(peripherals, start_date):
-    WEEK_DIR.mkdir(parents=True, exist_ok=True)
+    dirpath = _peripherals_dir_for_date(start_date)
     players = []
 
     for _, stats in peripherals.items():
         players.append(serialize_peripheral_player(stats))
 
-    with open(WEEK_DIR / f"{start_date}.json", "w") as f:
+    with open(dirpath / f"{start_date}.json", "w", encoding="utf-8") as f:
         json.dump(players, f, indent=2)
 
 
 
-start_date = date(2025, 11, 23)
+start_date = date(2024, 10, 6)
 week_peripherals = get_week_peripherals(start_date)
 save_week_peripherals(week_peripherals, start_date)
 append_peripherals_to_season(week_peripherals, start_date)

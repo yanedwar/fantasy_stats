@@ -141,28 +141,24 @@ def main():
 
                     get_goalie(players[player_id], goals, assists, sh_goals, win, otl, shutout, saves, g_against, nine_one)
     
-    if len(games_week) == 0:
-        print(f"No games found for week starting {start_date}. Exiting.")
-        return 0
-
-    if week_exists(start_date):
-        print(f"Week {start_date} already processed. Skipping save.")
-    else:
-        file_path = store_week(players, start_date, end_date, len(games_week))
-        print(f"Saved weekly data to {file_path}")
-
-    season = build_season_totals()
-    save_season_totals(season)
-
-    email_body = build_email_body(players, start_date, end_date, len(games_week))
-    if args.print_data:
-        print(email_body)
-    else:
-        if len(games_week) > 0:
-            send_weekly_email(email_body)
+    if len(games_week) > 0:
+        if week_exists(start_date):
+            print(f"Week {start_date} already processed. Skipping save.")
         else:
-            print(f"No games found for week starting {start_date}. No email to send.")
+            file_path = store_week(players, start_date, end_date, len(games_week))
+            print(f"Saved weekly data to {file_path}")
 
+        season = build_season_totals()
+        save_season_totals(season)
+
+        email_body = build_email_body(players, start_date, end_date, len(games_week))
+        if args.print_data:
+            print(email_body)
+        else:
+            send_weekly_email(email_body)
+
+    else:
+        print(f"No games found for the week of {start_date} to {end_date}. No data saved or email sent.")
     return 0
 
 if __name__ == "__main__":
