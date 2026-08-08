@@ -140,6 +140,10 @@ def main():
                             shutout = 1
 
                     get_goalie(players[player_id], goals, assists, sh_goals, win, otl, shutout, saves, g_against, nine_one)
+    
+    if len(games_week) == 0:
+        print(f"No games found for week starting {start_date}. Exiting.")
+        return 0
 
     if week_exists(start_date):
         print(f"Week {start_date} already processed. Skipping save.")

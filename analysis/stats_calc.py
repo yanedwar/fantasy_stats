@@ -69,3 +69,10 @@ def high_ceiling_players(n=10, per_game_threshold=10):
 def bust_rate(player, threshold=3):
     points = list(player["weeksPoints"].values())
     return sum(p <= threshold for p in points) / len(points)
+
+def order_season_by_points(season):
+    return sorted(season.values(), key=lambda p: p["points"], reverse=True)
+
+def order_season_by_ppg(season, min_games=5):
+    eligible = [p for p in season.values() if p["games_played"] > min_games]
+    return sorted(eligible, key=lambda p: p["ppg"], reverse=True)
