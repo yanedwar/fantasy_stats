@@ -154,11 +154,12 @@ def main():
     season = build_season_totals()
     save_season_totals(season)
 
-    email_body = build_email_body(players, start_date, end_date, len(games_week))
-    if args.print_data:
-        print(email_body)
-    else:
-        send_weekly_email(email_body)
+    if len(games_week) > 0:
+        email_body = build_email_body(players, start_date, end_date, len(games_week))
+        if args.print_data:
+            print(email_body)
+        else:
+            send_weekly_email(email_body)
 
     return 0
 
