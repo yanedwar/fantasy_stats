@@ -154,12 +154,14 @@ def main():
     season = build_season_totals()
     save_season_totals(season)
 
-    if len(games_week) > 0:
-        email_body = build_email_body(players, start_date, end_date, len(games_week))
-        if args.print_data:
-            print(email_body)
-        else:
+    email_body = build_email_body(players, start_date, end_date, len(games_week))
+    if args.print_data:
+        print(email_body)
+    else:
+        if len(games_week) > 0:
             send_weekly_email(email_body)
+        else:
+            print(f"No games found for week starting {start_date}. No email to send.")
 
     return 0
 
