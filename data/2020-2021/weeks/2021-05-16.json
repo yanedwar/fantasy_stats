@@ -1,0 +1,391 @@
+{
+  "weekStart": "2021-05-16",
+  "weekEnd": "2021-05-22",
+  "gamesPlayed": 3,
+  "playerStats": {
+    "8478444": {
+      "player_id": 8478444,
+      "name": "B. Boeser",
+      "team": "VAN",
+      "position": "R",
+      "points": 44.2,
+      "games_played": 3
+    },
+    "8476468": {
+      "player_id": 8476468,
+      "name": "J. Miller",
+      "team": "VAN",
+      "position": "C",
+      "points": 33.3,
+      "games_played": 3
+    },
+    "8477963": {
+      "player_id": 8477963,
+      "name": "J. Hawryluk",
+      "team": "VAN",
+      "position": "R",
+      "points": 0.9,
+      "games_played": 3
+    },
+    "8478146": {
+      "player_id": 8478146,
+      "name": "M. Highmore",
+      "team": "VAN",
+      "position": "C",
+      "points": 1.6,
+      "games_played": 3
+    },
+    "8476918": {
+      "player_id": 8476918,
+      "name": "J. Vesey",
+      "team": "VAN",
+      "position": "L",
+      "points": 3.2,
+      "games_played": 3
+    },
+    "8481535": {
+      "player_id": 8481535,
+      "name": "N. Hoglander",
+      "team": "VAN",
+      "position": "L",
+      "points": 12.6,
+      "games_played": 3
+    },
+    "8479981": {
+      "player_id": 8479981,
+      "name": "J. Gadjovich",
+      "team": "VAN",
+      "position": "L",
+      "points": -1.6,
+      "games_played": 1
+    },
+    "8476344": {
+      "player_id": 8476344,
+      "name": "T. Graovac",
+      "team": "VAN",
+      "position": "C",
+      "points": 14.6,
+      "games_played": 3
+    },
+    "8477500": {
+      "player_id": 8477500,
+      "name": "B. Horvat",
+      "team": "VAN",
+      "position": "C",
+      "points": 19.3,
+      "games_played": 3
+    },
+    "8476871": {
+      "player_id": 8476871,
+      "name": "T. Pearson",
+      "team": "VAN",
+      "position": "L",
+      "points": 2.9,
+      "games_played": 2
+    },
+    "8479772": {
+      "player_id": 8479772,
+      "name": "Z. MacEwen",
+      "team": "VAN",
+      "position": "R",
+      "points": -2.0,
+      "games_played": 1
+    },
+    "8476329": {
+      "player_id": 8476329,
+      "name": "T. Boyd",
+      "team": "VAN",
+      "position": "C",
+      "points": -8.0,
+      "games_played": 3
+    },
+    "8471303": {
+      "player_id": 8471303,
+      "name": "A. Edler",
+      "team": "VAN",
+      "position": "D",
+      "points": 10.6,
+      "games_played": 2
+    },
+    "8474612": {
+      "player_id": 8474612,
+      "name": "T. Hamonic",
+      "team": "VAN",
+      "position": "D",
+      "points": 29.0,
+      "games_played": 3
+    },
+    "8480800": {
+      "player_id": 8480800,
+      "name": "Q. Hughes",
+      "team": "VAN",
+      "position": "D",
+      "points": 23.0,
+      "games_played": 3
+    },
+    "8479355": {
+      "player_id": 8479355,
+      "name": "O. Juolevi",
+      "team": "VAN",
+      "position": "D",
+      "points": -4.1,
+      "games_played": 1
+    },
+    "8478970": {
+      "player_id": 8478970,
+      "name": "J. Chatfield",
+      "team": "VAN",
+      "position": "D",
+      "points": -9.7,
+      "games_played": 2
+    },
+    "8477220": {
+      "player_id": 8477220,
+      "name": "N. Schmidt",
+      "team": "VAN",
+      "position": "D",
+      "points": -1.5,
+      "games_played": 3
+    },
+    "8474651": {
+      "player_id": 8474651,
+      "name": "B. Holtby",
+      "team": "VAN",
+      "position": "G",
+      "points": -2.8,
+      "games_played": 2
+    },
+    "8478585": {
+      "player_id": 8478585,
+      "name": "D. Ryan",
+      "team": "CGY",
+      "position": "C",
+      "points": 19.4,
+      "games_played": 3
+    },
+    "8474150": {
+      "player_id": 8474150,
+      "name": "M. Backlund",
+      "team": "CGY",
+      "position": "C",
+      "points": 25.4,
+      "games_played": 3
+    },
+    "8476346": {
+      "player_id": 8476346,
+      "name": "J. Gaudreau",
+      "team": "CGY",
+      "position": "L",
+      "points": 27.9,
+      "games_played": 3
+    },
+    "8473473": {
+      "player_id": 8473473,
+      "name": "M. Lucic",
+      "team": "CGY",
+      "position": "L",
+      "points": 17.0,
+      "games_played": 3
+    },
+    "8479314": {
+      "player_id": 8479314,
+      "name": "M. Tkachuk",
+      "team": "CGY",
+      "position": "L",
+      "points": 32.4,
+      "games_played": 3
+    },
+    "8476439": {
+      "player_id": 8476439,
+      "name": "B. Ritchie",
+      "team": "CGY",
+      "position": "R",
+      "points": 25.5,
+      "games_played": 3
+    },
+    "8476410": {
+      "player_id": 8476410,
+      "name": "J. Leivo",
+      "team": "CGY",
+      "position": "L",
+      "points": 15.3,
+      "games_played": 1
+    },
+    "8477496": {
+      "player_id": 8477496,
+      "name": "E. Lindholm",
+      "team": "CGY",
+      "position": "C",
+      "points": 16.6,
+      "games_played": 3
+    },
+    "8479346": {
+      "player_id": 8479346,
+      "name": "D. Dube",
+      "team": "CGY",
+      "position": "C",
+      "points": 27.3,
+      "games_played": 3
+    },
+    "8480008": {
+      "player_id": 8480008,
+      "name": "A. Ruzicka",
+      "team": "CGY",
+      "position": "C",
+      "points": 11.1,
+      "games_played": 3
+    },
+    "8478866": {
+      "player_id": 8478866,
+      "name": "D. Simon",
+      "team": "CGY",
+      "position": "C",
+      "points": 2.6,
+      "games_played": 2
+    },
+    "8478233": {
+      "player_id": 8478233,
+      "name": "A. Mangiapane",
+      "team": "CGY",
+      "position": "L",
+      "points": 44.5,
+      "games_played": 3
+    },
+    "8482067": {
+      "player_id": 8482067,
+      "name": "C. Mackey",
+      "team": "CGY",
+      "position": "D",
+      "points": 19.9,
+      "games_played": 3
+    },
+    "8478397": {
+      "player_id": 8478397,
+      "name": "R. Andersson",
+      "team": "CGY",
+      "position": "D",
+      "points": 11.7,
+      "games_played": 3
+    },
+    "8470966": {
+      "player_id": 8470966,
+      "name": "M. Giordano",
+      "team": "CGY",
+      "position": "D",
+      "points": 28.7,
+      "games_played": 3
+    },
+    "8479976": {
+      "player_id": 8479976,
+      "name": "J. V\u00e4lim\u00e4ki",
+      "team": "CGY",
+      "position": "D",
+      "points": 19.4,
+      "games_played": 2
+    },
+    "8475690": {
+      "player_id": 8475690,
+      "name": "C. Tanev",
+      "team": "CGY",
+      "position": "D",
+      "points": 15.9,
+      "games_played": 3
+    },
+    "8474628": {
+      "player_id": 8474628,
+      "name": "M. Stone",
+      "team": "CGY",
+      "position": "D",
+      "points": 16.1,
+      "games_played": 3
+    },
+    "8474593": {
+      "player_id": 8474593,
+      "name": "J. Markstrom",
+      "team": "CGY",
+      "position": "G",
+      "points": 18.4,
+      "games_played": 2
+    },
+    "8482063": {
+      "player_id": 8482063,
+      "name": "M. Michaelis",
+      "team": "VAN",
+      "position": "L",
+      "points": 0.4,
+      "games_played": 2
+    },
+    "8479367": {
+      "player_id": 8479367,
+      "name": "W. Lockwood",
+      "team": "VAN",
+      "position": "R",
+      "points": 1.7,
+      "games_played": 2
+    },
+    "8480056": {
+      "player_id": 8480056,
+      "name": "J. Rathbone",
+      "team": "VAN",
+      "position": "D",
+      "points": 8.7,
+      "games_played": 2
+    },
+    "8474574": {
+      "player_id": 8474574,
+      "name": "T. Myers",
+      "team": "VAN",
+      "position": "D",
+      "points": 19.4,
+      "games_played": 2
+    },
+    "8477967": {
+      "player_id": 8477967,
+      "name": "T. Demko",
+      "team": "VAN",
+      "position": "G",
+      "points": 24.8,
+      "games_played": 1
+    },
+    "8475807": {
+      "player_id": 8475807,
+      "name": "J. Nordstrom",
+      "team": "CGY",
+      "position": "C",
+      "points": 11.3,
+      "games_played": 2
+    },
+    "8476300": {
+      "player_id": 8476300,
+      "name": "N. Nesterov",
+      "team": "CGY",
+      "position": "D",
+      "points": -6.0,
+      "games_played": 1
+    },
+    "8475839": {
+      "player_id": 8475839,
+      "name": "L. Domingue",
+      "team": "CGY",
+      "position": "G",
+      "points": 3.0,
+      "games_played": 1
+    },
+    "8479547": {
+      "player_id": 8479547,
+      "name": "M. Phillips",
+      "team": "CGY",
+      "position": "R",
+      "points": 1.8,
+      "games_played": 1
+    },
+    "8479986": {
+      "player_id": 8479986,
+      "name": "K. Lind",
+      "team": "VAN",
+      "position": "R",
+      "points": 0.9,
+      "games_played": 1
+    }
+  }
+}

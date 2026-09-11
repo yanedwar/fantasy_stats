@@ -1,0 +1,351 @@
+{
+  "weekStart": "2024-09-29",
+  "weekEnd": "2024-10-05",
+  "gamesPlayed": 2,
+  "playerStats": {
+    "8484145": {
+      "player_id": 8484145,
+      "name": "Z. Benson",
+      "team": "BUF",
+      "position": "L",
+      "points": 2.4,
+      "games_played": 1
+    },
+    "8478413": {
+      "player_id": 8478413,
+      "name": "J. Greenway",
+      "team": "BUF",
+      "position": "L",
+      "points": 10.4,
+      "games_played": 2
+    },
+    "8475722": {
+      "player_id": 8475722,
+      "name": "J. Zucker",
+      "team": "BUF",
+      "position": "L",
+      "points": 1.8,
+      "games_played": 2
+    },
+    "8482097": {
+      "player_id": 8482097,
+      "name": "J. Quinn",
+      "team": "BUF",
+      "position": "R",
+      "points": -4.0,
+      "games_played": 2
+    },
+    "8481528": {
+      "player_id": 8481528,
+      "name": "D. Cozens",
+      "team": "BUF",
+      "position": "C",
+      "points": 3.6,
+      "games_played": 2
+    },
+    "8479359": {
+      "player_id": 8479359,
+      "name": "B. Malenstyn",
+      "team": "BUF",
+      "position": "L",
+      "points": 5.1,
+      "games_played": 2
+    },
+    "8480802": {
+      "player_id": 8480802,
+      "name": "R. McLeod",
+      "team": "BUF",
+      "position": "C",
+      "points": -1.0,
+      "games_played": 2
+    },
+    "8479420": {
+      "player_id": 8479420,
+      "name": "T. Thompson",
+      "team": "BUF",
+      "position": "C",
+      "points": 11.2,
+      "games_played": 2
+    },
+    "8482175": {
+      "player_id": 8482175,
+      "name": "J. Peterka",
+      "team": "BUF",
+      "position": "R",
+      "points": 2.8,
+      "games_played": 2
+    },
+    "8478043": {
+      "player_id": 8478043,
+      "name": "S. Lafferty",
+      "team": "BUF",
+      "position": "C",
+      "points": 1.7,
+      "games_played": 2
+    },
+    "8477949": {
+      "player_id": 8477949,
+      "name": "A. Tuch",
+      "team": "BUF",
+      "position": "R",
+      "points": 6.2,
+      "games_played": 2
+    },
+    "8477979": {
+      "player_id": 8477979,
+      "name": "N. Aube-Kubel",
+      "team": "BUF",
+      "position": "R",
+      "points": 3.0,
+      "games_played": 1
+    },
+    "8481524": {
+      "player_id": 8481524,
+      "name": "B. Byram",
+      "team": "BUF",
+      "position": "D",
+      "points": 8.8,
+      "games_played": 2
+    },
+    "8480035": {
+      "player_id": 8480035,
+      "name": "H. Jokiharju",
+      "team": "BUF",
+      "position": "D",
+      "points": 4.0,
+      "games_played": 2
+    },
+    "8480807": {
+      "player_id": 8480807,
+      "name": "M. Samuelsson",
+      "team": "BUF",
+      "position": "D",
+      "points": 1.4,
+      "games_played": 2
+    },
+    "8482671": {
+      "player_id": 8482671,
+      "name": "O. Power",
+      "team": "BUF",
+      "position": "D",
+      "points": 12.1,
+      "games_played": 2
+    },
+    "8480839": {
+      "player_id": 8480839,
+      "name": "R. Dahlin",
+      "team": "BUF",
+      "position": "D",
+      "points": 2.1,
+      "games_played": 2
+    },
+    "8477365": {
+      "player_id": 8477365,
+      "name": "C. Clifton",
+      "team": "BUF",
+      "position": "D",
+      "points": 2.6,
+      "games_played": 2
+    },
+    "8480045": {
+      "player_id": 8480045,
+      "name": "U. Luukkonen",
+      "team": "BUF",
+      "position": "G",
+      "points": 2.4,
+      "games_played": 1
+    },
+    "8476474": {
+      "player_id": 8476474,
+      "name": "S. Noesen",
+      "team": "NJD",
+      "position": "R",
+      "points": 17.3,
+      "games_played": 2
+    },
+    "8480002": {
+      "player_id": 8480002,
+      "name": "N. Hischier",
+      "team": "NJD",
+      "position": "C",
+      "points": 16.7,
+      "games_played": 2
+    },
+    "8479414": {
+      "player_id": 8479414,
+      "name": "N. Bastian",
+      "team": "NJD",
+      "position": "R",
+      "points": 13.9,
+      "games_played": 2
+    },
+    "8476292": {
+      "player_id": 8476292,
+      "name": "O. Palat",
+      "team": "NJD",
+      "position": "L",
+      "points": 2.7,
+      "games_played": 1
+    },
+    "8478414": {
+      "player_id": 8478414,
+      "name": "T. Meier",
+      "team": "NJD",
+      "position": "R",
+      "points": 19.2,
+      "games_played": 2
+    },
+    "8477508": {
+      "player_id": 8477508,
+      "name": "C. Lazar",
+      "team": "NJD",
+      "position": "C",
+      "points": 4.5,
+      "games_played": 2
+    },
+    "8481032": {
+      "player_id": 8481032,
+      "name": "P. Cotter",
+      "team": "NJD",
+      "position": "L",
+      "points": 28.4,
+      "games_played": 2
+    },
+    "8475287": {
+      "player_id": 8475287,
+      "name": "E. Haula",
+      "team": "NJD",
+      "position": "L",
+      "points": 5.8,
+      "games_played": 2
+    },
+    "8479407": {
+      "player_id": 8479407,
+      "name": "J. Bratt",
+      "team": "NJD",
+      "position": "L",
+      "points": 12.9,
+      "games_played": 2
+    },
+    "8481559": {
+      "player_id": 8481559,
+      "name": "J. Hughes",
+      "team": "NJD",
+      "position": "C",
+      "points": 18.2,
+      "games_played": 2
+    },
+    "8475193": {
+      "player_id": 8475193,
+      "name": "T. Tatar",
+      "team": "NJD",
+      "position": "L",
+      "points": 5.5,
+      "games_played": 2
+    },
+    "8482110": {
+      "player_id": 8482110,
+      "name": "D. Mercer",
+      "team": "NJD",
+      "position": "C",
+      "points": 8.7,
+      "games_played": 2
+    },
+    "8475455": {
+      "player_id": 8475455,
+      "name": "B. Dillon",
+      "team": "NJD",
+      "position": "D",
+      "points": 11.0,
+      "games_played": 2
+    },
+    "8476462": {
+      "player_id": 8476462,
+      "name": "D. Hamilton",
+      "team": "NJD",
+      "position": "D",
+      "points": 12.9,
+      "games_played": 2
+    },
+    "8480192": {
+      "player_id": 8480192,
+      "name": "J. Kovacevic",
+      "team": "NJD",
+      "position": "D",
+      "points": 18.1,
+      "games_played": 2
+    },
+    "8483495": {
+      "player_id": 8483495,
+      "name": "S. Nemec",
+      "team": "NJD",
+      "position": "D",
+      "points": 6.7,
+      "games_played": 2
+    },
+    "8483429": {
+      "player_id": 8483429,
+      "name": "S. Casey",
+      "team": "NJD",
+      "position": "D",
+      "points": 9.8,
+      "games_played": 2
+    },
+    "8478399": {
+      "player_id": 8478399,
+      "name": "J. Siegenthaler",
+      "team": "NJD",
+      "position": "D",
+      "points": 14.8,
+      "games_played": 2
+    },
+    "8474593": {
+      "player_id": 8474593,
+      "name": "J. Markstrom",
+      "team": "NJD",
+      "position": "G",
+      "points": 23.0,
+      "games_played": 1
+    },
+    "8477073": {
+      "player_id": 8477073,
+      "name": "K. MacDermid",
+      "team": "NJD",
+      "position": "L",
+      "points": 1.0,
+      "games_played": 1
+    },
+    "8474596": {
+      "player_id": 8474596,
+      "name": "J. Allen",
+      "team": "NJD",
+      "position": "G",
+      "points": 15.2,
+      "games_played": 1
+    },
+    "8481522": {
+      "player_id": 8481522,
+      "name": "P. Krebs",
+      "team": "BUF",
+      "position": "C",
+      "points": 1.7,
+      "games_played": 1
+    },
+    "8483468": {
+      "player_id": 8483468,
+      "name": "J.Kulich",
+      "team": "BUF",
+      "position": "C",
+      "points": -2.6,
+      "games_played": 1
+    },
+    "8482221": {
+      "player_id": 8482221,
+      "name": "D. Levi",
+      "team": "BUF",
+      "position": "G",
+      "points": 14.4,
+      "games_played": 1
+    }
+  }
+}

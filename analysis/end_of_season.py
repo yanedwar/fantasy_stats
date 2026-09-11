@@ -1,6 +1,7 @@
+import argparse
 import json
 import matplotlib.pyplot as plt
-from aggregation import build_season_totals
+from aggregation import build_season_totals, save_season_totals
 from stats_calc import order_season_by_points, order_season_by_ppg
 
 def save_points_leaders(season):
@@ -24,6 +25,19 @@ def plot_points_vs_ppg(season):
     plt.grid()
     plt.show()
 
-season = build_season_totals()
 
-plot_points_vs_ppg(season)
+def main():
+    parser = argparse.ArgumentParser(description="Build and save a season snapshot")
+    parser.add_argument("--season", help="Season label such as 2024-2025")
+    parser.add_argument("--plot", action="store_true", help="Show a points vs ppg scatter plot")
+    args = parser.parse_args()
+
+    season = build_season_totals(args.season)
+    save_season_totals(season, args.season)
+
+    if args.plot:
+        plot_points_vs_ppg(season)
+
+
+if __name__ == "__main__":
+    main()

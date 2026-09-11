@@ -259,8 +259,8 @@ def save_week_peripherals(peripherals, start_date):
 
 
 
-start_date = date(2024, 10, 6)
-week_peripherals = get_week_peripherals(start_date)
-save_week_peripherals(week_peripherals, start_date)
-append_peripherals_to_season(week_peripherals, start_date)
+# start_date = date(2024, 9, 29)
+# week_peripherals = get_week_peripherals(start_date)
+# save_week_peripherals(week_peripherals, start_date)
+# append_peripherals_to_season(week_peripherals, start_date)
 

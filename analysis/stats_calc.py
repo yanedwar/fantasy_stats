@@ -1,8 +1,22 @@
 import json
 import statistics
+from pathlib import Path
 
-with open("data/season/season_2025_2026.json", "r") as f:
-    STATS = json.load(f)
+def _load_season_stats():
+    preferred = Path("data") / "2025-2026" / "season" / "season_2025_2026.json"
+    if preferred.exists():
+        with open(preferred, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    season_files = sorted(Path("data").glob("*/season/season_*.json"))
+    if season_files:
+        with open(season_files[-1], "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    return {"players": {}}
+
+
+STATS = _load_season_stats()
 
 players = STATS["players"]
 

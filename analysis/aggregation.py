@@ -1,11 +1,10 @@
 import json
-import os
 from pathlib import Path
 from datetime import datetime, date
 import re
 
 
-def _season_str_from_date(d: date) -> str:
+def season_from_date(d: date) -> str:
     if d.month >= 7:
         start = d.year
     else:
@@ -13,29 +12,41 @@ def _season_str_from_date(d: date) -> str:
     return f"{start}-{start + 1}"
 
 
+def _week_directories_for_season(season: str = None):
+    data_root = Path("data")
+
+    if season is not None:
+        weeks_dir = data_root / season / "weeks"
+        return [weeks_dir] if weeks_dir.exists() else []
+
+    season_dirs = []
+    if data_root.exists():
+        for p in sorted(data_root.iterdir()):
+            if p.is_dir() and re.match(r"^\d{4}-\d{4}$", p.name):
+                weeks_dir = p / "weeks"
+                if weeks_dir.exists():
+                    season_dirs.append(weeks_dir)
+
+    if season_dirs:
+        return [season_dirs[-1]]
+
+    legacy = data_root / "weeks"
+    if legacy.exists():
+        return [legacy]
+
+    return []
+
+
 def build_season_totals(season: str = None):
     season_players = {}
 
-    # Determine which weeks directories to read.
-    weeks_dirs = []
-    legacy = Path("data") / "weeks"
-    if legacy.exists():
-        weeks_dirs.append(legacy)
-    else:
-        # look for season directories like '2025-2026'
-        for p in sorted(Path("data").iterdir()):
-            if p.is_dir() and re.match(r"^\d{4}-\d{4}$", p.name):
-                w = p / "weeks"
-                if w.exists():
-                    if season is None or p.name == season:
-                        weeks_dirs.append(w)
+    weeks_dirs = _week_directories_for_season(season)
+    if season is not None and not weeks_dirs:
+        return season_players
 
     for weeks_dir in weeks_dirs:
-        for fname in sorted(os.listdir(weeks_dir)):
-            if not fname.endswith(".json"):
-                continue
-
-            with open(weeks_dir / fname) as f:
+        for week_file in sorted(weeks_dir.glob("*.json")):
+            with open(week_file) as f:
                 week = json.load(f)
 
             for pid, pdata in week["playerStats"].items():
@@ -76,7 +87,7 @@ def save_season_totals(season_players, season: str = None):
                 wk = next(iter(weeks.keys()))
                 try:
                     d = datetime.strptime(wk, "%Y-%m-%d").date()
-                    inferred = _season_str_from_date(d)
+                    inferred = season_from_date(d)
                     break
                 except Exception:
                     continue
