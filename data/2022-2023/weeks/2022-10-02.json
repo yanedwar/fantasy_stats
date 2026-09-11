@@ -1,0 +1,351 @@
+{
+  "weekStart": "2022-10-02",
+  "weekEnd": "2022-10-08",
+  "gamesPlayed": 2,
+  "playerStats": {
+    "8479996": {
+      "player_id": 8479996,
+      "name": "C. Glass",
+      "team": "NSH",
+      "position": "C",
+      "points": 8.8,
+      "games_played": 2
+    },
+    "8476887": {
+      "player_id": 8476887,
+      "name": "F. Forsberg",
+      "team": "NSH",
+      "position": "L",
+      "points": 19.2,
+      "games_played": 2
+    },
+    "8476925": {
+      "player_id": 8476925,
+      "name": "C. Sissons",
+      "team": "NSH",
+      "position": "C",
+      "points": 5.1,
+      "games_played": 2
+    },
+    "8478508": {
+      "player_id": 8478508,
+      "name": "Y. Trenin",
+      "team": "NSH",
+      "position": "C",
+      "points": 5.2,
+      "games_played": 2
+    },
+    "8475799": {
+      "player_id": 8475799,
+      "name": "N. Niederreiter",
+      "team": "NSH",
+      "position": "R",
+      "points": 30.3,
+      "games_played": 2
+    },
+    "8480009": {
+      "player_id": 8480009,
+      "name": "E. Tolvanen",
+      "team": "NSH",
+      "position": "R",
+      "points": 19.5,
+      "games_played": 2
+    },
+    "8482062": {
+      "player_id": 8482062,
+      "name": "C. Smith",
+      "team": "NSH",
+      "position": "R",
+      "points": 10.5,
+      "games_played": 2
+    },
+    "8480748": {
+      "player_id": 8480748,
+      "name": "K. Sherwood",
+      "team": "NSH",
+      "position": "L",
+      "points": 18.0,
+      "games_played": 2
+    },
+    "8475798": {
+      "player_id": 8475798,
+      "name": "M. Granlund",
+      "team": "NSH",
+      "position": "C",
+      "points": 16.9,
+      "games_played": 2
+    },
+    "8479661": {
+      "player_id": 8479661,
+      "name": "T. Jeannot",
+      "team": "NSH",
+      "position": "L",
+      "points": 5.0,
+      "games_played": 2
+    },
+    "8475793": {
+      "player_id": 8475793,
+      "name": "R. Johansen",
+      "team": "NSH",
+      "position": "C",
+      "points": 13.2,
+      "games_played": 2
+    },
+    "8475168": {
+      "player_id": 8475168,
+      "name": "M. Duchene",
+      "team": "NSH",
+      "position": "C",
+      "points": 19.7,
+      "games_played": 2
+    },
+    "8475218": {
+      "player_id": 8475218,
+      "name": "M. Ekholm",
+      "team": "NSH",
+      "position": "D",
+      "points": 12.5,
+      "games_played": 2
+    },
+    "8474151": {
+      "player_id": 8474151,
+      "name": "R. McDonagh",
+      "team": "NSH",
+      "position": "D",
+      "points": 21.1,
+      "games_played": 2
+    },
+    "8478851": {
+      "player_id": 8478851,
+      "name": "A. Carrier",
+      "team": "NSH",
+      "position": "D",
+      "points": 4.5,
+      "games_played": 2
+    },
+    "8479371": {
+      "player_id": 8479371,
+      "name": "D. Fabbro",
+      "team": "NSH",
+      "position": "D",
+      "points": 14.7,
+      "games_played": 2
+    },
+    "8474600": {
+      "player_id": 8474600,
+      "name": "R. Josi",
+      "team": "NSH",
+      "position": "D",
+      "points": 14.9,
+      "games_played": 2
+    },
+    "8474697": {
+      "player_id": 8474697,
+      "name": "M. Borowiecki",
+      "team": "NSH",
+      "position": "D",
+      "points": 4.1,
+      "games_played": 1
+    },
+    "8477424": {
+      "player_id": 8477424,
+      "name": "J. Saros",
+      "team": "NSH",
+      "position": "G",
+      "points": 23.0,
+      "games_played": 1
+    },
+    "8481477": {
+      "player_id": 8481477,
+      "name": "N. Sturm",
+      "team": "SJS",
+      "position": "C",
+      "points": -0.1,
+      "games_played": 2
+    },
+    "8479316": {
+      "player_id": 8479316,
+      "name": "L. Kunin",
+      "team": "SJS",
+      "position": "C",
+      "points": 13.0,
+      "games_played": 2
+    },
+    "8474009": {
+      "player_id": 8474009,
+      "name": "N. Bonino",
+      "team": "SJS",
+      "position": "C",
+      "points": 2.2,
+      "games_played": 2
+    },
+    "8478904": {
+      "player_id": 8478904,
+      "name": "S. Lorentz",
+      "team": "SJS",
+      "position": "C",
+      "points": 11.0,
+      "games_played": 2
+    },
+    "8478067": {
+      "player_id": 8478067,
+      "name": "O. Lindblom",
+      "team": "SJS",
+      "position": "L",
+      "points": 2.9,
+      "games_played": 2
+    },
+    "8478414": {
+      "player_id": 8478414,
+      "name": "T. Meier",
+      "team": "SJS",
+      "position": "R",
+      "points": 17.5,
+      "games_played": 2
+    },
+    "8474053": {
+      "player_id": 8474053,
+      "name": "L. Couture",
+      "team": "SJS",
+      "position": "C",
+      "points": 9.8,
+      "games_played": 2
+    },
+    "8479981": {
+      "player_id": 8479981,
+      "name": "J. Gadjovich",
+      "team": "SJS",
+      "position": "L",
+      "points": -0.8,
+      "games_played": 2
+    },
+    "8476881": {
+      "player_id": 8476881,
+      "name": "T. Hertl",
+      "team": "SJS",
+      "position": "C",
+      "points": 13.2,
+      "games_played": 2
+    },
+    "8478099": {
+      "player_id": 8478099,
+      "name": "K. Labanc",
+      "team": "SJS",
+      "position": "R",
+      "points": 6.3,
+      "games_played": 2
+    },
+    "8479393": {
+      "player_id": 8479393,
+      "name": "N. Gregor",
+      "team": "SJS",
+      "position": "L",
+      "points": 0.1,
+      "games_played": 1
+    },
+    "8476442": {
+      "player_id": 8476442,
+      "name": "M. Nieto",
+      "team": "SJS",
+      "position": "L",
+      "points": -0.3,
+      "games_played": 2
+    },
+    "8476449": {
+      "player_id": 8476449,
+      "name": "S. Harrington",
+      "team": "SJS",
+      "position": "D",
+      "points": 1.6,
+      "games_played": 1
+    },
+    "8476988": {
+      "player_id": 8476988,
+      "name": "M. Benning",
+      "team": "SJS",
+      "position": "D",
+      "points": -3.0,
+      "games_played": 2
+    },
+    "8479983": {
+      "player_id": 8479983,
+      "name": "M. Ferraro",
+      "team": "SJS",
+      "position": "D",
+      "points": 15.4,
+      "games_played": 2
+    },
+    "8471709": {
+      "player_id": 8471709,
+      "name": "M. Vlasic",
+      "team": "SJS",
+      "position": "D",
+      "points": 3.4,
+      "games_played": 2
+    },
+    "8480160": {
+      "player_id": 8480160,
+      "name": "R. Simek",
+      "team": "SJS",
+      "position": "D",
+      "points": -0.7,
+      "games_played": 2
+    },
+    "8474578": {
+      "player_id": 8474578,
+      "name": "E. Karlsson",
+      "team": "SJS",
+      "position": "D",
+      "points": 7.2,
+      "games_played": 2
+    },
+    "8473503": {
+      "player_id": 8473503,
+      "name": "J. Reimer",
+      "team": "SJS",
+      "position": "G",
+      "points": 7.8,
+      "games_played": 1
+    },
+    "8478431": {
+      "player_id": 8478431,
+      "name": "E. Svechnikov",
+      "team": "SJS",
+      "position": "L",
+      "points": -1.6,
+      "games_played": 1
+    },
+    "8477034": {
+      "player_id": 8477034,
+      "name": "J. Megna",
+      "team": "SJS",
+      "position": "D",
+      "points": -2.7,
+      "games_played": 1
+    },
+    "8478039": {
+      "player_id": 8478039,
+      "name": "K. Kahkonen",
+      "team": "SJS",
+      "position": "G",
+      "points": 0.0,
+      "games_played": 1
+    },
+    "8478468": {
+      "player_id": 8478468,
+      "name": "J. Lauzon",
+      "team": "NSH",
+      "position": "D",
+      "points": 1.6,
+      "games_played": 1
+    },
+    "8480947": {
+      "player_id": 8480947,
+      "name": "K. Lankinen",
+      "team": "NSH",
+      "position": "G",
+      "points": 20.6,
+      "games_played": 1
+    }
+  }
+}

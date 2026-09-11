@@ -1,8 +1,22 @@
 import json
 import statistics
+from pathlib import Path
 
-with open("data/season/season_2025_2026.json", "r") as f:
-    STATS = json.load(f)
+def _load_season_stats():
+    preferred = Path("data") / "2025-2026" / "season" / "season_2025_2026.json"
+    if preferred.exists():
+        with open(preferred, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    season_files = sorted(Path("data").glob("*/season/season_*.json"))
+    if season_files:
+        with open(season_files[-1], "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    return {"players": {}}
+
+
+STATS = _load_season_stats()
 
 players = STATS["players"]
 
@@ -69,3 +83,10 @@ def high_ceiling_players(n=10, per_game_threshold=10):
 def bust_rate(player, threshold=3):
     points = list(player["weeksPoints"].values())
     return sum(p <= threshold for p in points) / len(points)
+
+def order_season_by_points(season):
+    return sorted(season.values(), key=lambda p: p["points"], reverse=True)
+
+def order_season_by_ppg(season, min_games=5):
+    eligible = [p for p in season.values() if p["games_played"] > min_games]
+    return sorted(eligible, key=lambda p: p["ppg"], reverse=True)
